@@ -17,21 +17,23 @@ ActiveRecord::Schema.define(version: 20130714022830) do
     t.integer  "user_id"
     t.integer  "favorites"
     t.text     "message"
-    t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "password"
+    t.string   "name"
+    t.string   "password_digest"
     t.string   "email"
     t.integer  "follow_id"
     t.integer  "follower_id"
-    t.string   "avatar"
+    t.string   "avatar_url"
     t.integer  "favorite_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end

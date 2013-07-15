@@ -1,4 +1,6 @@
 OutfitRails::Application.routes.draw do
+  get "home/index"
+  get "home/posts"
   resources :posts
 
   resources :users
