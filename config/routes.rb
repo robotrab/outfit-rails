@@ -1,13 +1,13 @@
 OutfitRails::Application.routes.draw do
+  get "sessions/new"
+  post "sessions/create"
+  get "sessions/destroy"
   get "home/index"
   get "home/posts"
   resources :posts
 
   resources :users
 
-  get "user/login"
-  get "user/signup"
-  get "user/logout"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

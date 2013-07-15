@@ -8,12 +8,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def login
-  end
-
-  def logout
-  end
-
   # PUBLIC PROFILE PAGE
   # GET /users/1
   # GET /users/1.json
@@ -39,6 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'Account registered!' }
         format.json { render action: 'show', status: :created, location: @user }
       else
