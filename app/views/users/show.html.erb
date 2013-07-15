@@ -1,24 +1,37 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user %>
+<h1>Post an Outfit</h1>
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
+    <%= form_for @post do |f| %>
+        <%= f.text_area :message %>
+        <%= f.submit "Post!" %>
+    <% end %>
+</p>
+<% end %>
+
+<img class="avatar" src="<%= @user.avatar_url %>">
+<h1><%= @user.name %></h1>
+<p>
+  <strong>@<%= @user.username %></strong>
+</p>
+<p>
+    <%= @user.posts.size %> Posts <br>
+    XX Followers <br>
+    XX Following
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password_digest %>
-</p>
+<h1>Posts</h1>
+<% @user.posts.each do |post| %>
+    <img class="avatar" src="<%= @user.avatar_url %>">
+    <strong><%= @user.name %></strong>
+    @<%= @user.username %>
+    <%= time_ago_in_words(post.created_at) %><br>
+    <p> <%= post.message %> </p>
+<% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 
-<p>
-  <strong>Avatar:</strong>
-  <%= @user.avatar_url %>
-</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

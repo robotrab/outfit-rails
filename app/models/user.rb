@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
     validates :email, uniqueness: true, presence: true, format: { with: /\A[\w.+-]+@([\w]+.)+\w+\Z/ }
     before_validation :prep_email
     before_save :create_avatar_url
+    has_many :posts
 
     private
 
