@@ -7,7 +7,7 @@
 
 <p>
   <strong>Password:</strong>
-  <%= @user.password %>
+  <%= @user.password_digest %>
 </p>
 
 <p>
@@ -16,23 +16,8 @@
 </p>
 
 <p>
-  <strong>Follow:</strong>
-  <%= @user.follow_id %>
-</p>
-
-<p>
-  <strong>Follower:</strong>
-  <%= @user.follower_id %>
-</p>
-
-<p>
   <strong>Avatar:</strong>
-  <%= @user.avatar %>
-</p>
-
-<p>
-  <strong>Favorite:</strong>
-  <%= @user.favorite_id %>
+  <%= @user.avatar_url %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

@@ -12,34 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :follow_id %><br>
-    <%= f.number_field :follow_id %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :follower_id %><br>
-    <%= f.number_field :follower_id %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :avatar %><br>
-    <%= f.text_field :avatar %>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :favorite_id %><br>
-    <%= f.number_field :favorite_id %>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
   </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Account" %>
   </div>
 <% end %>
