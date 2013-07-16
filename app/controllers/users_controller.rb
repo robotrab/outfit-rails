@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     if current_user
-      redirect_to profile_path
+      redirect_to home_path
     else
       @user = User.new
     end
