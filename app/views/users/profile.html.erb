@@ -1,0 +1,10 @@
+<h1>Feed</h1>
+<% @posts.each do |post| %>
+  <a href="<%= user_path post.user %>">
+    <img src="<%= post.user.avatar_url %>">
+    <%= post.user.name %>
+  </a>
+  @<%= post.user.username %>
+  <%= time_ago_in_words(post.created_at) %>
+  <p><%= post.message %></p>
+<% end %>

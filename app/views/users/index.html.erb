@@ -1,35 +1,20 @@
 <h1>Listing users</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Name</th>
-      <th>Password</th>
-      <th>Email</th>
-      <th>Avatar</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.name %></td>
-        <td><%= user.password_digest %></td>
-        <td><%= user.email %></td>
-        <td><%= user.avatar_url %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<% @users.each do |user| %>
+  <a href="<%= user_path user %>">
+    <img src="<%= user.avatar_url %>">
+    <%= user.name %>
+  </a>
+  @<%= user.username %>
+  <p>
+    <%= user.posts.size %> Posts <br>
+    <%= user.followers.count %> Followers <br>
+    <%= user.followeds.count %> Following <br>
+  </p>
+  <% if user.posts.first %>
+    <p><%= user.posts.first.message %></p>
+  <% end %>
 <br>
+<% end %>
 
 <%= link_to 'New User', new_user_path %>

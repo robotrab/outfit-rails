@@ -22,12 +22,28 @@ class UsersController < ApplicationController
   # SIGNUP PAGE
   # GET /users/new
   def new
-    @user = User.new
+    if current_user
+      redirect_to profile_path
+    else
+      @user = User.new
+    end
   end
 
   # SETTINGS EDIT PAGE
   # GET /users/1/edit
   def edit
+  end
+
+  # GET LIST OF POSTS OF FOLLOWED USERS
+  #
+  def profile
+    if current_user
+      @post = Post.new
+      friend_ids = current_user.followeds.map(&:id).push(current_user.id)
+      @posts = Post.find_all_by_user_id(friend_ids)
+    else
+      redirect_to root_url
+    end
   end
 
   # POST SIGNUP

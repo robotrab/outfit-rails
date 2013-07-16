@@ -4,8 +4,7 @@ OutfitRails::Application.routes.draw do
   get "sessions/new"
   post "sessions/create"
   get "sessions/destroy"
-  get "home/index"
-  get "home/posts"
+  get "home", to: 'users#profile', as: 'home'
   resources :posts
 
   resources :users
