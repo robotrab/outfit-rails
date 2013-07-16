@@ -1,4 +1,6 @@
 OutfitRails::Application.routes.draw do
+  resources :relationships
+
   get "sessions/new"
   post "sessions/create"
   get "sessions/destroy"
