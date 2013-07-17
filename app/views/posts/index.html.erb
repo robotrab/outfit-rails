@@ -1,10 +1,7 @@
 <% if current_user %>
   <h1>Post an Outfit</h1>
   <p>
-  <%= form_for @post do |f| %>
-      <%= f.text_area :message %>
-      <%= f.submit "Post!" %>
-  <% end %>
+  <%= render 'form' %>
   </p>
 <% end %>
   <h1>Public Posts</h1>

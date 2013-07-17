@@ -1,12 +1,7 @@
-<p id="notice"><%= notice %></p>
-
 <% if current_user %>
 <h1>Post an Outfit</h1>
 <p>
-    <%= form_for @post do |f| %>
-        <%= f.text_area :message %>
-        <%= f.submit "Post!" %>
-    <% end %>
+    <%= render 'posts/form' %>
 </p>
 <% end %>
 
@@ -35,11 +30,13 @@
 
 <h1>Posts</h1>
 <% @user.posts.each do |post| %>
-    <img class="avatar" src="<%= @user.avatar_url %>">
-    <strong><%= @user.name %></strong>
-    @<%= @user.username %>
-    <%= time_ago_in_words(post.created_at) %><br>
-    <p> <%= post.message %> </p>
+    <a href="<%= post_path post %>">
+        <img class="avatar" src="<%= @user.avatar_url %>">
+        <strong><%= @user.name %></strong>
+        @<%= @user.username %>
+        <%= time_ago_in_words(post.created_at) %><br>
+        <p> <%= post.message %> </p>
+    </a>
 <% end %>
 
 

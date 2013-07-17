@@ -1,3 +1,49 @@
+<div class="row-fluid">
+  <div class="span2">
+    <div class="well sidebar-nav nav-side">
+      <ul class="nav nav-list">
+        <li class="nav-header"><a href="<%= user_path current_user %>">
+          <img class="img-polaroid" src="<%= current_user.avatar_url %>"><br><%= current_user.name %> (@<%= current_user.username %>)</a></li>
+        <li class="active"><a href="#followeds"><i class="icon-eye-open"></i>Following (<%= current_user.followeds.count %>)</a></li>
+        <li><a href="#followers"><i class="icon-user"></i>Followers (<%= current_user.followers.count %>)</a></li>
+        <li><a href="#favorites"><i class="icon-heart"></i>Favorites (TODO)</a></li>
+        <li><a href="#find"><i class="icon-search"></i>Find</a></li>
+        <li><a href="<%= new_post_path %>"><i class="icon-edit"></i>Post</a></li>
+        <!-- <li><a href="#">Trending</a></li> -->
+      </ul>
+    </div><!--/.well -->
+  </div><!--/span-->
+
+  <div class="span3 well">
+    <%= image_tag "cats1.jpg", alt: "Cat1" %>
+    <ul class="unstyled inline share-row">
+      <li><a class="btn" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-eye-open"></i></a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-heart"></i></a></li>
+    </ul>
+  </div>
+  <div class="span4 well">
+    <%= image_tag "cats2.jpg", alt: "Cat2", class: "img-rounded" %>
+    <ul class="unstyled inline share-row">
+      <li><a class="btn" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-eye-open"></i></a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-heart"></i></a></li>
+    </ul>
+ </div>
+  <div class="span3 well">
+    <%= image_tag "cats3.jpg", alt: "Cat3" %>
+    <ul class="unstyled inline share-row">
+      <li><a class="btn" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-eye-open"></i></a></li>
+      <li class="pull-right"><a class="btn" href="#TODO"><i class="icon-heart"></i></a></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+
+
 <h1>Feed</h1>
 <% @posts.each do |post| %>
   <a href="<%= user_path post.user %>">
