@@ -5,7 +5,9 @@ OutfitRails::Application.routes.draw do
   post "sessions/create"
   get "sessions/destroy"
   get "home", to: 'users#profile', as: 'home'
-  resources :posts
+  resources :posts do
+    put :favorite, on: :member
+  end
 
   resources :users
 

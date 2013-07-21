@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite]
 
   # RENDER POSTS FOR USER
   # GET /posts
@@ -67,6 +67,23 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+    end
+  end
+
+  def favorite
+    type = params[:type]
+    if type == 'favorite'
+      unless current_user.favorites.exists?(@post)
+        current_user.favorites << @post
+        redirect_to :back, notice: 'You favorited the post.'
+      end
+    elsif type == 'unfavorite'
+      if current_user.favorites.exists?(@post)
+        current_user.favorites.delete(@post)
+        redirect_to :back, notice: 'Unfavorited post.'
+      end
+    else
+      redirect_to :back, notice: 'Problem favoriting post.'
     end
   end
 

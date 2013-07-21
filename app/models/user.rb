@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
     before_validation :prep_email
     before_save :create_avatar_url
     has_many :posts
+    has_many :favorite_posts # Relationship
+    has_many :favorites, through: :favorite_posts, source: :post # Actual posts favorited.
     has_many :follower_relationships, class_name: "Relationship", foreign_key: "followed_id"
     has_many :followed_relationships, class_name: "Relationship", foreign_key: "follower_id"
     has_many :followers, through: :follower_relationships

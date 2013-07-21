@@ -53,4 +53,11 @@
   @<%= post.user.username %>
   <%= time_ago_in_words(post.created_at) %>
   <p><%= post.message %></p>
+  <p>
+    <% if current_user.favorites.include?(post) %>
+      <%= link_to "unfavorite", favorite_post_path(post, type: 'unfavorite'), method: :put %>
+    <% else %>
+      <%= link_to "favorite", favorite_post_path(post, type: 'favorite'), method: :put %>
+    <% end %>
+  </p>
 <% end %>

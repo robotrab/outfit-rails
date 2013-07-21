@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716214146) do
+ActiveRecord::Schema.define(version: 20130720234807) do
+
+  create_table "favorite_posts", force: true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
-    t.integer  "favorites"
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -36,7 +42,6 @@ ActiveRecord::Schema.define(version: 20130716214146) do
     t.integer  "follow_id"
     t.integer  "follower_id"
     t.string   "avatar_url"
-    t.integer  "favorite_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
