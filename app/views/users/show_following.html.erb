@@ -1,0 +1,12 @@
+<div class="row-fluid">
+  <%= render partial: "profile_menu", locals: {page: "following"}%>
+
+  <h1>Following</h1>
+  <% current_user.followeds.each do |followed| %>
+    <a href="<%= user_path followed %>">
+      <img src="<%= followed.avatar_url %>">
+      <%= followed.name %>
+    </a>
+    @<%= followed.username %>
+  <% end %>
+</div>

@@ -19,6 +19,9 @@ class UsersController < ApplicationController
     ).first_or_initialize if current_user
   end
 
+  def show_favorites
+  end
+
   # SIGNUP PAGE
   # GET /users/new
   def new

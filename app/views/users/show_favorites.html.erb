@@ -1,0 +1,19 @@
+<div class="row-fluid">
+  <%= render partial: "profile_menu", locals: {page: "favorites"}%>
+
+  <h1>Favorites</h1>
+  <% current_user.favorites.each do |post| %>
+    <a href="<%= user_path post.user %>">
+      <img src="<%= post.user.avatar_url %>">
+      <%= post.user.name %>
+    </a>
+    @<%= post.user.username %>
+    <%= time_ago_in_words(post.created_at) %>
+    <p><%= post.message %></p>
+    <p>
+      <% if current_user.favorites.include?(post) %>
+        <%= link_to "unfavorite", favorite_post_path(post, type: 'unfavorite'), method: :put %>
+      <% end %>
+    </p>
+  <% end %>
+</div>

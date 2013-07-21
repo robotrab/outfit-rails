@@ -1,0 +1,14 @@
+<div class="span2">
+  <div class="well sidebar-nav nav-side">
+    <ul class="nav nav-list">
+      <li class="nav-header"><a href="<%= user_path current_user %>">
+        <img class="img-polaroid" src="<%= current_user.avatar_url %>"><br><%= current_user.name %> (@<%= current_user.username %>)</a></li>
+      <li class=<%= page=="follows" ? "active" : "" %>><a href="<%= following_path %>"><i class="icon-eye-open"></i>Following (<%= current_user.followeds.count %>)</a></li>
+      <li class=<%= page=="followers" ? "active" : "" %>><a href="<%= followers_path %>"><i class="icon-user"></i>Followers (<%= current_user.followers.count %>)</a></li>
+      <li class=<%= page=="favorites" ? "active" : "" %>><a href="<%= favorites_path %>"><i class="icon-heart"></i>Favorites (<%= current_user.favorites.count %>)</a></li>
+      <li class=<%= page=="find" ? "active" : "" %>><a href="#find"><i class="icon-search"></i>Find</a></li>
+      <li><a href="<%= new_post_path %>"><i class="icon-edit"></i>Post</a></li>
+      <!-- <li><a href="#">Trending</a></li> -->
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->
