@@ -1,4 +1,5 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, :html => { :multipart => true } do |f| %>
+  <%= f.file_field :outfit %>
   <%= f.text_area :message %>
   <%= f.submit "Post!" %>
 <% end %>

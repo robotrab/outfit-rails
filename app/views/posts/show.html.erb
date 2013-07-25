@@ -2,4 +2,7 @@
 <strong><%= @post.user.name %></strong>
 @<%= @post.user.username %>
 <%= time_ago_in_words(@post.created_at) %><br>
+<p>
+  <%= image_tag @post.outfit.url %>
+</p>
 <p> <%= @post.message %> </p>

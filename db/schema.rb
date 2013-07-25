@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130720234807) do
+ActiveRecord::Schema.define(version: 20130725002552) do
 
   create_table "favorite_posts", force: true do |t|
     t.integer  "post_id"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20130720234807) do
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "outfit_file_name"
+    t.string   "outfit_content_type"
+    t.integer  "outfit_file_size"
+    t.datetime "outfit_updated_at"
   end
 
   create_table "relationships", force: true do |t|
