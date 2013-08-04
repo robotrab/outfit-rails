@@ -40,7 +40,7 @@
   @<%= post.user.username %>
   <%= time_ago_in_words(post.created_at) %>
   <p>
-    <%= image_tag post.outfit.url %>
+    <%= image_tag post.outfit.url(:profile) %>
   </p>
   <p><%= post.message %></p>
   <p>
