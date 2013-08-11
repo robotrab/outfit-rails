@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   Paperclip.interpolates :user_id do |attachment, style|
     attachment.instance.user_id
   end
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :processing
   default_scope order: 'posts.created_at DESC'
   has_attached_file :outfit,
     styles: { :profile => "364x646>", :mobile => "256x455>"},
@@ -27,6 +27,9 @@ class Post < ActiveRecord::Base
   private
 
   def process_outfit
+    return unless (cropping? && !processing)
+    self.processing = true
     outfit.reprocess!
+    self.processing = false
   end
 end
