@@ -1,5 +1,6 @@
 <%= form_for @post, :html => { :multipart => true } do |f| %>
-  <%= f.file_field :outfit %>
+  <%= f.file_field :outfit, onchange: "PreviewImage();", id: 'uploadImage' %>
+  <img id="uploadPreview" style="height: 500px;">
   <%= f.text_area :message %>
   <%= f.submit "Post!" %>
 <% end %>
