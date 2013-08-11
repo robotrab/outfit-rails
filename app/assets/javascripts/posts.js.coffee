@@ -7,3 +7,4 @@ this.PreviewImage = ->
   oFReader.readAsDataURL document.getElementById("uploadImage").files[0]
   oFReader.onload = (oFREvent) ->
     document.getElementById("uploadPreview").src = oFREvent.target.result
+
