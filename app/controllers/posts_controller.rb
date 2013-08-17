@@ -30,8 +30,10 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    outfit = params[:post].delete(:outfit)
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.outfit = outfit
 
     respond_to do |format|
       if @post.save
