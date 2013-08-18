@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :favorite_posts # Relationship
   has_many :favorited_by, through: :favorite_posts, source: :user # Actual users favoriting post
+  has_many :comments, dependent: :destroy
   validates :message, length: { maximum: 140 }
   validates_attachment :outfit, presence: true,
     :content_type => { :content_type => /image/ },

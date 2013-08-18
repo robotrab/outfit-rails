@@ -6,3 +6,6 @@
   <%= image_tag @post.outfit.url %>
 </p>
 <p> <%= @post.message %> </p>
+<p> Comments </p>
+<%= render @post.comments %>
+<%= render "comments/form" %>

@@ -1,4 +1,5 @@
 OutfitRails::Application.routes.draw do
+
   resources :relationships
 
   get "sessions/new"
@@ -10,6 +11,7 @@ OutfitRails::Application.routes.draw do
   get "followers", to: 'users#show_followers', as: 'followers'
   resources :posts do
     put :favorite, on: :member
+    resources :comments
   end
 
   resources :users
