@@ -1,14 +1,30 @@
 <% content_for(:head) do %>
   <%= stylesheet_link_tag "jquery.Jcrop.min" %>
+  <style type="text/css">
+    div.viewport {
+      overflow: hidden;
+      position: relative;
+    }
+
+    #uploadPreview {
+      display: block;
+      position: absolute;
+      z-index: 1000;
+      max-width: none;
+    }
+  </style>
 <% end %>
 
 <%= form_for @post, :html => { :multipart => true } do |f| %>
   <%= f.file_field :outfit, onchange: "PreviewImage();", id: 'uploadImage' %>
-  <%= image_tag "", id: "uploadPreview", width: "500" %>
+  <div class="viewport">
+    <%= image_tag "", id: "uploadPreview", width: "500" %>
+  </div>
   <%= f.text_area :message %>
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.hidden_field attribute, id: attribute %>
   <% end %>
+  <%= button_tag "Done Cropping", type: :button, id: "finishCrop"  %>
   <%= f.submit "Post!" %>
 <% end %>
 
@@ -16,21 +32,55 @@
   <%= javascript_include_tag "jquery.Jcrop.min" %>
   <script type="text/javascript">
     $(function() {
+      var global_x;
+      var global_y;
+      var global_w;
+      var global_h;
+
       $('#uploadPreview').load(function(){
         $(this).Jcrop({
           onChange: update_crop,
           onSelect: update_crop
         });
       });
-    });
 
-    function update_crop(coords) {
-      var img = $('#uploadPreview');
-      var ratio = img[0].naturalWidth / img.width();
-      $('#crop_x').val(Math.round(coords.x * ratio));
-      $('#crop_y').val(Math.round(coords.y * ratio));
-      $('#crop_w').val(Math.round(coords.w * ratio));
-      $('#crop_h').val(Math.round(coords.h * ratio));
-    }
+      $('#finishCrop').click(function(){
+        var img = $('#uploadPreview');
+        setViewport(img[0], global_x, global_y, global_w, global_h);
+      });
+
+      // $('#finishCrop').onClick(function(){
+      //   var css = document.createElement("style");
+      //   css.type = "text/css";
+      //   css.innerHTML = "#uploadPreview { clip: rect() }";
+      //   document.body.appendChild(css);
+      // });
+
+      function setViewport(img, x, y, width, height) {
+        img.style.left = "-" + x + "px";
+        img.style.top  = "-" + y + "px";
+
+        if (width !== undefined) {
+            img.parentNode.style.width  = width  + "px";
+            img.parentNode.style.height = height + "px";
+        }
+        $(img).css({'display' : '', 'visibility' : '', 'max-width': 'auto'});
+        //$('img').css({'max-width' : ''});
+      }
+
+      function update_crop(coords) {
+        var img = $('#uploadPreview');
+        var ratio = img[0].naturalWidth / img.width();
+        $('#crop_x').val(Math.round(coords.x * ratio));
+        $('#crop_y').val(Math.round(coords.y * ratio));
+        $('#crop_w').val(Math.round(coords.w * ratio));
+        $('#crop_h').val(Math.round(coords.h * ratio));
+
+        global_x = coords.x;
+        global_y = coords.y;
+        global_w = coords.w;
+        global_h = coords.h;
+      }
+    });
   </script>
 <% end %>
