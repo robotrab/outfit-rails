@@ -19,6 +19,7 @@ class Post < ActiveRecord::Base
   validates_attachment :outfit, presence: true,
     :content_type => { :content_type => /image/ },
     :size => { :in => 0..6.megabytes }
+  after_update :reprocess_outfit, :if => :cropping?
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
@@ -26,7 +27,14 @@ class Post < ActiveRecord::Base
 
   def image_geometry(style = :original)
     @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
+    @geometry[style] ||= Paperclip::Geometry.from_file(outfit.path(style))
+  end
+
+  private
+
+  def reprocess_outfit
+    outfit.assign(outfit)
+    outfit.save
   end
 
 end

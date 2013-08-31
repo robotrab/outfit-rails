@@ -1,35 +1,20 @@
-<% content_for(:head) do %>
-  <%= stylesheet_link_tag "jquery.Jcrop.min" %>
-  <style type="text/css">
-    div.viewport {
-      overflow: hidden;
-      position: relative;
-    }
-
-    #uploadPreview {
-      display: block;
-      //position: absolute;
-      //z-index: 1000;
-      max-width: none;
-    }
-  </style>
-<% end %>
-
-<%= form_for @post, :html => { :multipart => true } do |f| %>
-  <%= f.file_field :outfit, onchange: "PreviewImage();", id: 'uploadImage' %>
+<%= form_for @post,
+     :html => { :multipart => true } do |f| %>
+  <!-- <%= f.file_field :outfit, onchange: "PreviewImage();", id: 'uploadImage' %>
   <div class="viewport">
     <%= image_tag "", id: "uploadPreview", width: "500" %>
-  </div>
+  </div> -->
+  <%= f.file_field :outfit, id: 'uploadImage' %>
   <%= f.text_area :message %>
-  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+  <!-- <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= f.hidden_field attribute, id: attribute %>
   <% end %>
-  <%= button_tag "Crop", type: :button, id: "cropButton"  %>
+  <%= button_tag "Crop", type: :button, id: "cropButton"  %> -->
   <%= f.submit "Post!" %>
 <% end %>
 
 <% content_for(:footer) do %>
-  <%= javascript_include_tag "jquery.annotate" %>
+  <!-- <%= javascript_include_tag "jquery.annotate" %>
   <%= javascript_include_tag "jquery.Jcrop.min" %>
   <%= javascript_include_tag "post_crop" %>
   <script type="text/javascript">
@@ -43,5 +28,5 @@
         $('div.viewport').annotatableImage(blackNote);
       //});
     });
-  </script>
+  </script> -->
 <% end %>

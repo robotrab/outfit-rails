@@ -30,19 +30,21 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    outfit = params[:post].delete(:outfit)
+    # outfit = params[:post].delete(:outfit)
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.outfit = outfit
+    # @post.outfit = outfit
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to current_user, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
+    if @post.save
+      if params[:post][:outfit].blank?
+        flash[:notice] = "Post successfully created."
+        redirect_to @post
       else
-        format.html { render action: 'new', error: "Problem!" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        render action: 'crop'
       end
+    else
+      flash[:error] = "Problem!"
+      render action: 'new'
     end
   end
 
@@ -50,14 +52,15 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
+    if @post.update(post_params)
+      if params[:post][:outfit].blank?
+        flash[:notice] = 'Post was successfully updated.'
+        redirect_to @post
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        render action: 'crop'
       end
+    else
+      render action: 'edit'
     end
   end
 
