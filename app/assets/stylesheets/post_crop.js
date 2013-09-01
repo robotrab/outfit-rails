@@ -5,6 +5,13 @@ $(function() {
   var global_h;
   var jcrop_api;
 
+  function blackNote() {
+    return $(document.createElement('span'))
+      .text('TEST');
+  }
+
+  $('div.viewport').annotatableImage(blackNote);
+
   $('#cropButton').click(function(){
     var that = $(this);
     var img = $('#uploadPreview');
@@ -23,6 +30,8 @@ $(function() {
       jcrop_api.destroy();
       setViewport(img[0], global_x, global_y, global_w, global_h);
       that.text("Crop");
+      var annotations = $('div.viewport span').seralizeAnnotations();
+      $('div.viewport').addAnnotations(blackNote, annotations);
     }
   });
 
@@ -51,11 +60,9 @@ $(function() {
     global_w = coords.w;
     global_h = coords.h;
     //SHIFT LEFT AND TOP OF ANNOTATIONS BASED ON NEW IMAGE WIDTHS
-    $('div.viewport.span').each(function() {
-      $(this).css({
-        "left": "+="+coords.x,
-        "top": "+="+coords.y
-      });
-    });
+    // $('div.viewport.span').each(function() {
+    //   $(this).css("left", "+="+coords.x);
+    //   $(this).css("top", "+="+coords.y);
+    // });
   }
 });
