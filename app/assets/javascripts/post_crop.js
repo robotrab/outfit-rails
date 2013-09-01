@@ -5,7 +5,6 @@ $(function() {
   var global_h;
   var jcrop_api;
 
-
   $('#cropButton').click(function(){
     var that = $(this);
     var img = $('#uploadPreview');
@@ -52,5 +51,11 @@ $(function() {
     global_w = coords.w;
     global_h = coords.h;
     //SHIFT LEFT AND TOP OF ANNOTATIONS BASED ON NEW IMAGE WIDTHS
+    $('div.viewport.span').each(function() {
+      $(this).css({
+        "left": "+="+coords.x,
+        "top": "+="+coords.y
+      });
+    });
   }
 });
