@@ -10,6 +10,7 @@ OutfitRails::Application.routes.draw do
   get "following", to: 'users#show_following', as: 'following'
   get "followers", to: 'users#show_followers', as: 'followers'
   resources :posts do
+    get "crop", on: :member
     put :favorite, on: :member
     resources :comments
   end

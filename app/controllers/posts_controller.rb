@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite, :crop]
 
   # RENDER POSTS FOR USER
   # GET /posts
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
         flash[:notice] = "Post successfully created."
         redirect_to @post
       else
-        render action: 'crop'
+        redirect_to crop_post_url(@post)
       end
     else
       flash[:error] = "Problem!"
@@ -57,11 +57,14 @@ class PostsController < ApplicationController
         flash[:notice] = 'Post was successfully updated.'
         redirect_to @post
       else
-        render action: 'crop'
+        redirect_to crop_post_url(@post)
       end
     else
       render action: 'edit'
     end
+  end
+
+  def crop
   end
 
   # DELETE POST
