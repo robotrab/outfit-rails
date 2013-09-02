@@ -15,11 +15,14 @@ class Post < ActiveRecord::Base
   has_many :favorite_posts # Relationship
   has_many :favorited_by, through: :favorite_posts, source: :user # Actual users favoriting post
   has_many :comments, dependent: :destroy
+  has_many :taggings
+  has_many :tags, through: :taggings
   validates :message, length: { maximum: 140 }
   validates_attachment :outfit, presence: true,
     :content_type => { :content_type => /image/ },
     :size => { :in => 0..6.megabytes }
   before_update :reprocess_outfit, :if => :cropping?
+  accepts_nested_attributes_for :tags
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

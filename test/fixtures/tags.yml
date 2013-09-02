@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyString
+  x_loc: 9.99
+  y_loc: 9.99
+
+two:
+  content: MyString
+  x_loc: 9.99
+  y_loc: 9.99

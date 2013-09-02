@@ -1,7 +1,13 @@
 <%= form_for @post do |form| %>
-    <div class="tagBox">
-        <%= image_tag @post.outfit.url(:profile) %>
-    </div>
+
+    <%= form.fields_for :tags do |t_field| %>
+        <div class="tagBox">
+            <%= image_tag @post.outfit.url(:profile) %>
+        </div>
+        Content: <%= t_field.text_field :content %>
+        X Loc: <%= t_field.text_field :x_loc %>
+        Y Loc: <%= t_field.text_field :y_loc %>
+    <% end %>
     <p><%= form.submit "Tag" %></p>
 <% end %>
 
