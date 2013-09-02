@@ -1,0 +1,21 @@
+<%= form_for @post do |form| %>
+    <div class="tagBox">
+        <%= image_tag @post.outfit.url(:profile) %>
+    </div>
+    <p><%= form.submit "Tag" %></p>
+<% end %>
+
+<% content_for(:footer) do %>
+  <%= javascript_include_tag "jquery.annotate" %>
+  <script type="text/javascript">
+    $(function(){
+      function blackNote() {
+        return $(document.createElement('span'))
+          .text('TEST');
+      }
+
+    $('#tagBox').annotatableImage(blackNote);
+
+    });
+  </script>
+<% end %>

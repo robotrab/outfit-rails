@@ -11,6 +11,7 @@ OutfitRails::Application.routes.draw do
   get "followers", to: 'users#show_followers', as: 'followers'
   resources :posts do
     get "crop", on: :member
+    get "tag", on: :member
     put :favorite, on: :member
     resources :comments
   end

@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   # ON NEW POST CREATE
   # POST /posts
   # POST /posts.json
+  # TODO: ADD CHECKBOX TO FORM TO TOGGLE CROPPING
   def create
     # outfit = params[:post].delete(:outfit)
     @post = Post.new(post_params)
@@ -37,8 +38,12 @@ class PostsController < ApplicationController
 
     if @post.save
       if params[:post][:outfit].blank?
-        flash[:notice] = "Post successfully created."
-        redirect_to @post
+        if params[:post][:tags].blank?
+          flash[:notice] = "Post successfully created."
+          redirect_to @post
+        else
+          redirect_to tag_post_url(@post)
+        end
       else
         redirect_to crop_post_url(@post)
       end
@@ -54,8 +59,12 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       if params[:post][:outfit].blank?
-        flash[:notice] = 'Post was successfully updated.'
-        redirect_to @post
+        if params[:post][:tags].blank?
+          flash[:notice] = 'Post was successfully updated.'
+          redirect_to @post
+        else
+          redirect_to tag_post_url(@post)
+        end
       else
         redirect_to crop_post_url(@post)
       end
@@ -65,6 +74,9 @@ class PostsController < ApplicationController
   end
 
   def crop
+  end
+
+  def tag
   end
 
   # DELETE POST
