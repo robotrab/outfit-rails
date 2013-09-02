@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   validates_attachment :outfit, presence: true,
     :content_type => { :content_type => /image/ },
     :size => { :in => 0..6.megabytes }
-  after_update :reprocess_outfit, :if => :cropping?
+  before_update :reprocess_outfit, :if => :cropping?
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
@@ -33,8 +33,8 @@ class Post < ActiveRecord::Base
   private
 
   def reprocess_outfit
-    outfit.assign(outfit)
-    outfit.save
+    self.outfit.assign(outfit)
+    self.outfit.save
   end
 
 end
