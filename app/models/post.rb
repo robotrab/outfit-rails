@@ -2,10 +2,10 @@ class Post < ActiveRecord::Base
   Paperclip.interpolates :user_id do |attachment, style|
     attachment.instance.user_id
   end
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :processing
   default_scope order: 'posts.created_at DESC'
   has_attached_file :outfit,
-    styles: { :profile => "364x646>", :mobile => "256x455>" },
+    styles: { :profile => "profile", :mobile => "mobile" },
     processors: [:cropper],
     default_style: :profile,
     hash_secret: "testinglongSecretString",
@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   validates_attachment :outfit, presence: true,
     :content_type => { :content_type => /image/ },
     :size => { :in => 0..6.megabytes }
-  #after_update :reprocess_outfit, :if => :cropping?
+  after_update :reprocess_outfit, :if => :cropping?
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

@@ -3,7 +3,7 @@
 @<%= @post.user.username %>
 <%= time_ago_in_words(@post.created_at) %><br>
 <p>
-  <%= image_tag @post.outfit.url(:profile) %>
+  <%= image_tag @post.outfit.url %>
 </p>
 <p> <%= @post.message %> </p>
 <p> Comments </p>

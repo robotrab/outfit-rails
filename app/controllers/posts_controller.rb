@@ -52,10 +52,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    if :cropping?
-      puts '------------------CROPPING-----------------------'
-      @post.outfit.reprocess!
-    end
     if @post.update(post_params)
       if params[:post][:outfit].blank?
         flash[:notice] = 'Post was successfully updated.'
@@ -105,9 +101,5 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:user_id, :favorites, :message, :outfit, :crop_x, :crop_y, :crop_w, :crop_h)
-    end
-
-    def cropping?
-      !params[:post][:crop_x].blank? && !params[:post][:crop_y].blank? && !params[:post][:crop_w].blank? && !params[:post][:crop_h].blank?
     end
 end
