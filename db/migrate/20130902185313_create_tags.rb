@@ -4,7 +4,7 @@ class CreateTags < ActiveRecord::Migration
       t.string :content
       t.decimal :x_loc
       t.decimal :y_loc
-
+      t.belongs_to :post, index: true
       t.timestamps
     end
   end

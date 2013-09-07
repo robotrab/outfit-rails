@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite, :crop]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorite, :crop, :tag]
 
   # RENDER POSTS FOR USER
   # GET /posts
@@ -29,7 +29,6 @@ class PostsController < ApplicationController
   # ON NEW POST CREATE
   # POST /posts
   # POST /posts.json
-  # TODO: ADD CHECKBOX TO FORM TO TOGGLE CROPPING
   def create
     # outfit = params[:post].delete(:outfit)
     @post = Post.new(post_params)
@@ -37,8 +36,8 @@ class PostsController < ApplicationController
     # @post.outfit = outfit
 
     if @post.save
-      if params[:post][:outfit].blank?
-        if params[:post][:tags].blank?
+      if !params.has_key?(:crop_pic)
+        if !params[:post][:tags_attributes].blank?
           flash[:notice] = "Post successfully created."
           redirect_to @post
         else
@@ -58,8 +57,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     if @post.update(post_params)
-      if params[:post][:outfit].blank?
-        if params[:post][:tags].blank?
+      if !params.has_key?(:crop_pic)
+        if !params[:post][:tags_attributes].blank?
           flash[:notice] = 'Post was successfully updated.'
           redirect_to @post
         else
@@ -115,6 +114,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :favorites, :message, :outfit, :crop_x, :crop_y, :crop_w, :crop_h)
+      params.require(:post).permit(:user_id, :favorites, :message, :outfit, :crop_x, :crop_y, :crop_w, :crop_h, :tags_attributes)
     end
 end

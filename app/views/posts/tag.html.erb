@@ -1,14 +1,17 @@
 <%= form_for @post do |form| %>
-
-    <%= form.fields_for :tags do |t_field| %>
-        <div class="tagBox">
-            <%= image_tag @post.outfit.url(:profile) %>
-        </div>
-        Content: <%= t_field.text_field :content %>
-        X Loc: <%= t_field.text_field :x_loc %>
-        Y Loc: <%= t_field.text_field :y_loc %>
-    <% end %>
-    <p><%= form.submit "Tag" %></p>
+  <div id="tagBox">
+    <%= image_tag @post.outfit.url(:profile) %>
+  </div>
+  <%= form.fields_for :tags do |t| %>
+    <%= render 'tag_fields', f: t %>
+  <% end %>
+  <%= link_to_add_fields "Add Tag", form, :tags %>
+  <div class="field">
+    <%= form.text_area :message %>
+  </div>
+  <div class="actions">
+    <p><%= form.submit "Post" %></p>
+  </div>
 <% end %>
 
 <% content_for(:footer) do %>
