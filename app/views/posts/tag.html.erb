@@ -1,6 +1,6 @@
 <%= form_for @post do |form| %>
   <div id="tagBox">
-    <%= image_tag @post.outfit.url(:profile) %>
+    <%= image_tag @post.outfit.url(:profile), id: "tagImage" %>
   </div>
   <%= form.fields_for :tags do |t| %>
     <%= render 'tag_fields', f: t %>
@@ -18,12 +18,44 @@
   <%= javascript_include_tag "jquery.annotate" %>
   <script type="text/javascript">
     $(function(){
-      function blackNote() {
-        return $(document.createElement('span'))
-          .text('TEST');
-      }
+      // function blackNote() {
+      //   return $(document.createElement('span'))
+      //     .text('TEST');
+      // }
 
-    $('#tagBox').annotatableImage(blackNote);
+      // $('#tagBox').annotatableImage(blackNote);
+
+      $('#tagImage').click(function(e) {
+        var x = e.pageX - $(this).offset().left;
+        var y = e.pageY - $(this).offset().top;
+        $('.add_fields').trigger("click");
+        $('input[id$="x_loc"]').each(function() {
+          var x_loc = $(this);
+
+          if (x_loc.val().trim().length === 0) {
+            x_loc.val(x);
+          }
+        });
+        $('input[id$="y_loc"]').each(function() {
+          var y_loc = $(this);
+
+          if (y_loc.val().trim().length === 0) {
+            y_loc.val(y);
+          }
+        });
+        // $('input').each(function() {
+        //   var x_loc = $(this).filter('[id$="x_loc"]');
+        //   var y_loc = $(this).filter('[id$="y_loc"]');
+
+        //   if (x_loc !== null && x_loc.val().trim().length === 0) {
+        //     x_loc.val(x);
+        //   }
+        //   if (y_loc.val().trim().length === 0) {
+        //     y_loc.val(y);
+        //   }
+        // });
+      });
+
 
     });
   </script>
