@@ -1,10 +1,10 @@
 <%= form_for @post do |form| %>
   <div id="tagBox">
     <%= image_tag @post.outfit.url(:profile), id: "tagImage" %>
+    <%= form.fields_for :tags do |t| %>
+      <%= render 'tag_fields', f: t %>
+    <% end %>
   </div>
-  <%= form.fields_for :tags do |t| %>
-    <%= render 'tag_fields', f: t %>
-  <% end %>
   <%= link_to_add_fields "Add Tag", form, :tags %>
   <div class="field">
     <%= form.text_area :message %>
@@ -29,6 +29,16 @@
         var x = e.pageX - $(this).offset().left;
         var y = e.pageY - $(this).offset().top;
         $('.add_fields').trigger("click");
+        $('input[id$="content"]').each(function() {
+          var content = $(this);
+
+          if (!content.hasClass('tagInput')) {
+            content.css('left', x);
+            content.css('top', y);
+            content.addClass('tagInput');
+          }
+
+        });
         $('input[id$="x_loc"]').each(function() {
           var x_loc = $(this);
 
