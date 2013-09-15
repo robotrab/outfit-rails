@@ -27,7 +27,7 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -29,7 +29,17 @@
         var x = e.pageX - $(this).offset().left;
         var y = e.pageY - $(this).offset().top;
         $('.add_fields').trigger("click");
-        $('input[id$="content"]').each(function() {
+        // $('input[id$="content"]').each(function() {
+        //   var content = $(this);
+
+        //   if (!content.hasClass('tagInput')) {
+        //     content.css('left', x);
+        //     content.css('top', y);
+        //     content.addClass('tagInput');
+        //   }
+
+        // });
+        $('div[class="input-group"]').each(function() {
           var content = $(this);
 
           if (!content.hasClass('tagInput')) {

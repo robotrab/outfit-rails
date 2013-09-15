@@ -13,3 +13,16 @@ body {
 .tagInput {
     position: absolute;
 }
+
+.glyphicon {
+    position: static;
+}
+
+.input-group-addon {
+    width: 0;
+}
+
+.remove_fields:hover {
+    cursor: pointer;
+    color: #fff;
+}

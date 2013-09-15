@@ -1,13 +1,13 @@
 <fieldset>
-  <%= f.label :content, "Content:" %>
-  <%= f.text_field :content %>
+    <div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-tag"></span>
+        <%= f.text_field :content, class: "form-control" %>
+        <%= f.hidden_field :_destroy %>
+        <span class="input-group-addon glyphicon glyphicon-remove remove_fields"></span>
+    </div>
 
-  <%= f.label :x_loc, "X Loc:" %>
-  <%= f.text_field :x_loc %>
+  <%= f.hidden_field :x_loc %>
 
-  <%= f.label :y_loc, "Y Loc:" %>
-  <%= f.text_field :y_loc %>
+  <%= f.hidden_field :y_loc %>
 
-  <%= f.hidden_field :_destroy %>
-  <%= link_to "remove", '#', class: "remove_fields" %>
 </fieldset>
