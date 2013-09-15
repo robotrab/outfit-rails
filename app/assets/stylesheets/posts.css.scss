@@ -26,3 +26,12 @@ body {
     cursor: pointer;
     color: #fff;
 }
+
+#expand {
+    transition: width .4s ease-in-out;
+    width: 0px;
+}
+
+#expand:hover, #expand:focus {
+    width: 200px;
+}
