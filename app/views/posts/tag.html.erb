@@ -2,7 +2,7 @@
   <div id="tagBox">
     <%= image_tag @post.outfit.url(:profile), id: "tagImage" %>
     <%= form.fields_for :outfit_tags do |t| %>
-      <%= render 'tag_fields', f: t %>
+      <%= render 'outfit_tag_fields', f: t %>
     <% end %>
   </div>
   <%= link_to_add_fields "Add Tag", form, :outfit_tags %>

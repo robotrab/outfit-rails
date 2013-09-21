@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
     if @post.save
       if !params.has_key?(:crop_pic)
-        if !params[:post][:tags_attributes].blank?
+        if !params[:post][:outfit_tags_attributes].blank?
           flash[:notice] = "Post successfully created."
           redirect_to @post
         else
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       if !params.has_key?(:crop_pic)
-        if !params[:post][:tags_attributes].blank?
+        if !params[:post][:outfit_tags_attributes].blank?
           flash[:notice] = 'Post was successfully updated.'
           redirect_to @post
         else
@@ -114,6 +114,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :favorites, :message, :outfit, :crop_x, :crop_y, :crop_w, :crop_h, :tags_attributes)
+      params.require(:post).permit(:user_id, :favorites, :message, :outfit, :crop_x, :crop_y, :crop_w, :crop_h, :outfit_tags_attributes)
     end
 end

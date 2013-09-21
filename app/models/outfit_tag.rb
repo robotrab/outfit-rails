@@ -1,3 +1,3 @@
-class Outfit_Tag < ActiveRecord::Base
+class OutfitTag < ActiveRecord::Base
     belongs_to :post
 end
