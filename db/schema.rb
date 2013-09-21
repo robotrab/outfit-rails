@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130902185313) do
+ActiveRecord::Schema.define(version: 20130921210731) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20130902185313) do
     t.datetime "updated_at"
   end
 
+  create_table "outfit_tags", force: true do |t|
+    t.string   "content"
+    t.decimal  "x_loc"
+    t.decimal  "y_loc"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "outfit_tags", ["post_id"], name: "index_outfit_tags_on_post_id"
+
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.text     "message"
@@ -49,16 +60,22 @@ ActiveRecord::Schema.define(version: 20130902185313) do
     t.datetime "updated_at"
   end
 
-  create_table "tags", force: true do |t|
-    t.string   "content"
-    t.decimal  "x_loc"
-    t.decimal  "y_loc"
-    t.integer  "post_id"
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "tags", ["post_id"], name: "index_tags_on_post_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"
