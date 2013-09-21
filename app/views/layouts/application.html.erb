@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>OutfitRails</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", media: "all" %>
-  <!--<style>
+  <style>
       body {
-          padding-top: 60px;
-          padding-bottom: 40px;
+          padding-top: 50px;
+          padding-bottom: 20px;
       }
-  </style>-->
+  </style>
 
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -24,26 +20,35 @@
 <body>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <%= link_to "Outfit", home_path, class: "brand" %>
-      <div class="nav-collapse collapse">
-        <ul class="nav pull-right">
-          <% if current_user %>
-            <li><%= link_to "Public Profiles", users_path %></li>
-            <li><%= link_to "My Profile", current_user %></li>
-            <li><%= link_to "Public Posts", posts_path %></li>
-            <li><%= link_to "Log Out", sessions_destroy_path %></li>
-          <% else %>
-            <%= form_tag sessions_create_path, class: "navbar-form pull-right" do %>
-              <%= text_field_tag :username, nil, placeholder: "username", class: "span2" %>
-              <%= password_field_tag :password, nil, placeholder: "password", class: "span2" %>
-              <%= submit_tag "Log In", class: "btn" %>
-            <% end %>
-          <% end %>
-        </ul>
-      </div><!--/.nav-collapse -->
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Outfit", home_path, class: "navbar-brand" %>
     </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <% if current_user %>
+          <li><%= link_to "Public Profiles", users_path %></li>
+          <li><%= link_to "My Profile", current_user %></li>
+          <li><%= link_to "Public Posts", posts_path %></li>
+          <li><%= link_to "Log Out", sessions_destroy_path %></li>
+        <% else %>
+      </ul>
+          <%= form_tag sessions_create_path, class: "navbar-form navbar-right" do %>
+            <div class="form-group">
+              <%= text_field_tag :username, nil, placeholder: "username", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= password_field_tag :password, nil, placeholder: "password", class: "form-control" %>
+            </div>
+            <%= submit_tag "Log In", class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+    </div><!--/.nav-collapse -->
   </div>
 </div>
 
@@ -51,7 +56,7 @@
   <%= content_tag :div, msg, class: "flash #{name}" %>
 <% end %>
 
-<div class="container-fluid">
+<div class="container">
 
   <%= yield %>
 
