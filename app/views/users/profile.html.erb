@@ -42,7 +42,7 @@
   <p>
     <%= image_tag post.outfit.url(:profile), class: "img-responsive" %>
   </p>
-  <p><%= post.message %></p>
+  <p><%= raw auto_link(post.message) %></p>
   <p>
     <% if current_user.favorites.include?(post) %>
       <%= link_to "unfavorite", favorite_post_path(post, type: 'unfavorite'), method: :put %>
