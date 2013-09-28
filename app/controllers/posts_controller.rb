@@ -106,6 +106,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = Post.search(params)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

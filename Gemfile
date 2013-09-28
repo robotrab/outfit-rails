@@ -41,6 +41,7 @@ gem 'paperclip'
 gem 'remotipart', '~> 1.2'
 gem 'acts-as-taggable-on'
 gem "twitter-text", "~> 1.6.3"
+gem 'tire'
 # Use unicorn as the app server
 # gem 'unicorn'
 

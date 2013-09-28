@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
   Paperclip.interpolates :user_id do |attachment, style|
     attachment.instance.user_id
   end
@@ -33,6 +35,12 @@ class Post < ActiveRecord::Base
   def image_geometry(style = :original)
     @geometry ||= {}
     @geometry[style] ||= Paperclip::Geometry.from_file(outfit.path(style))
+  end
+
+  def self.search(params)
+    tire.search(load: true) do
+      query { string params[:q], default_operator: "AND" } if params[:q].present?
+    end
   end
 
   private

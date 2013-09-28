@@ -17,13 +17,13 @@ module Twitter
     DEFAULT_CASHTAG_CLASS = "outfit-url cashtag".freeze
 
     # Default URL base for auto-linked usernames
-    DEFAULT_USERNAME_URL_BASE = "https://localhost:3000/".freeze
+    DEFAULT_USERNAME_URL_BASE = "http://localhost:3000/".freeze
     # Default URL base for auto-linked lists
-    DEFAULT_LIST_URL_BASE = "https://localhost:3000/".freeze
+    DEFAULT_LIST_URL_BASE = "http://localhost:3000/".freeze
     # Default URL base for auto-linked hashtags
-    DEFAULT_HASHTAG_URL_BASE = "https://localhost:3000/search?q=%23".freeze
+    DEFAULT_HASHTAG_URL_BASE = "http://localhost:3000/search?q=%23".freeze
     # Default URL base for auto-linked cashtags
-    DEFAULT_CASHTAG_URL_BASE = "https://localhost:3000/search?q=%24".freeze
+    DEFAULT_CASHTAG_URL_BASE = "http://localhost:3000/search?q=%24".freeze
 
     # Default attributes for invisible span tag
     DEFAULT_INVISIBLE_TAG_ATTRS = "style='position:absolute;left:-9999px;'".freeze

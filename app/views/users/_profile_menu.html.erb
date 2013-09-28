@@ -6,7 +6,13 @@
       <li class=<%= page=="follows" ? "active" : "" %>><a href="<%= following_path %>"><span class="glyphicon glyphicon-eye-open"></span> Following (<%= current_user.followeds.count %>)</a></li>
       <li class=<%= page=="followers" ? "active" : "" %>><a href="<%= followers_path %>"><span class="glyphicon glyphicon-user"></span> Followers (<%= current_user.followers.count %>)</a></li>
       <li class=<%= page=="favorites" ? "active" : "" %>><a href="<%= favorites_path %>"><span class="glyphicon glyphicon-heart"></span> Favorites (<%= current_user.favorites.count %>)</a></li>
-      <li class=<%= page=="find" ? "active" : "" %>><a href="#find"><span class="glyphicon glyphicon-search"></span> Find</a></li>
+      <li class=<%= page=="find" ? "active" : "" %>>
+        <%= form_tag search_path, method: :get do %>
+          <span class="glyphicon glyphicon-search"></span>
+          <%= search_field_tag :q, params[:q] %>
+          <%= submit_tag "Search", name: nil %>
+        <% end %>
+      </li>
       <li><a href="<%= new_post_path %>"><span class="glyphicon glyphicon-edit"></span> Post</a></li>
       <!-- <li><a href="#">Trending</a></li> -->
     </ul>

@@ -6,6 +6,7 @@ OutfitRails::Application.routes.draw do
   post "sessions/create"
   get "sessions/destroy"
   get "home", to: 'users#profile', as: 'home'
+  get "search", to: 'posts#search', as: 'search'
   get "favorites", to: 'users#show_favorites', as: 'favorites'
   get "following", to: 'users#show_following', as: 'following'
   get "followers", to: 'users#show_followers', as: 'followers'

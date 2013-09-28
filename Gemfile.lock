@@ -34,6 +34,7 @@ GEM
       tzinfo (~> 0.3.37)
     acts-as-taggable-on (2.4.1)
       rails (>= 3, < 5)
+    ansi (1.4.3)
     arel (4.0.0)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
@@ -51,6 +52,7 @@ GEM
     coffee-script-source (1.6.3)
     erubis (2.7.0)
     execjs (2.0.1)
+    hashr (0.0.22)
     hike (1.2.3)
     i18n (0.6.5)
     jbuilder (1.5.1)
@@ -92,6 +94,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     remotipart (1.2.1)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -114,6 +118,14 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    tire (0.6.0)
+      activemodel (>= 3.0)
+      activesupport
+      ansi
+      hashr (~> 0.0.19)
+      multi_json (~> 1.3)
+      rake
+      rest-client (~> 1.6)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -143,5 +155,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
+  tire
   twitter-text (~> 1.6.3)
   uglifier (>= 1.3.0)

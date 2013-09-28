@@ -1,0 +1,13 @@
+<h1>Search Results</h1>
+  <% @posts.each do |post| %>
+    <a href="<%= user_path post.user %>">
+    <img class="avatar" src="<%= post.user.avatar_url %>">
+    <%= post.user.name %>
+    </a>
+    @<%= post.user.username %>
+    <%= time_ago_in_words(post.created_at) %>
+    <p>
+        <%= image_tag post.outfit.url %>
+    </p>
+    <p> <%= post.message %> </p>
+  <% end %>
