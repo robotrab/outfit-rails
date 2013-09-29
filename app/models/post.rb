@@ -1,6 +1,26 @@
 class Post < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
+  mapping do
+    indexes :id, type: 'integer'
+    indexes :user_id, type: 'integer'
+    indexes :user, type: 'object',
+                properties: {
+                  name: { type: 'multi_field',
+                          fields: { name: { type: 'string', analyzer: 'snowball' } }
+                        }
+                }
+    indexes :message
+    indexes :created_at, type: 'date'
+    indexes :updated_at, type: 'date'
+    indexes :outfit_file_name
+    indexes :outfit_content_type
+    indexes :outfit_file_size, type: 'integer'
+    indexes :outfit_updated_at, type: 'date'
+    indexes :outfit , type: 'object',
+                  properties: { url: { type: 'string' } }
+  end
+
   Paperclip.interpolates :user_id do |attachment, style|
     attachment.instance.user_id
   end
@@ -41,6 +61,12 @@ class Post < ActiveRecord::Base
     tire.search(load: true) do
       query { string params[:q], default_operator: "AND" } if params[:q].present?
     end
+  end
+
+  def to_indexed_json
+    to_json( include: { comments: { only: [:body, :user_id] },
+                        user: { only: [:username, :name] },
+                        } )
   end
 
   private
