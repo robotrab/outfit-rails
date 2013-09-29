@@ -69,6 +69,15 @@ class Post < ActiveRecord::Base
                         } )
   end
 
+  def as_json(options={})
+    super(only: [:message],
+          include: {
+            comments: { only: [:body] },
+            user: { only: [:username, :name] }
+            }
+          )
+  end
+
   private
 
   def reprocess_outfit

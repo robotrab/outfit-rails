@@ -7,14 +7,45 @@
       <li class=<%= page=="followers" ? "active" : "" %>><a href="<%= followers_path %>"><span class="glyphicon glyphicon-user"></span> Followers (<%= current_user.followers.count %>)</a></li>
       <li class=<%= page=="favorites" ? "active" : "" %>><a href="<%= favorites_path %>"><span class="glyphicon glyphicon-heart"></span> Favorites (<%= current_user.favorites.count %>)</a></li>
       <li class=<%= page=="find" ? "active" : "" %>>
-        <%= form_tag search_path, method: :get do %>
+        <form action="<%= search_path %>" method="get">
           <span class="glyphicon glyphicon-search"></span>
-          <%= search_field_tag :q, params[:q] %>
+          <%= search_field_tag :q, params[:q], class: 'find-type' %>
           <%= submit_tag "Search", name: nil %>
-        <% end %>
+        </form>
       </li>
       <li><a href="<%= new_post_path %>"><span class="glyphicon glyphicon-edit"></span> Post</a></li>
       <!-- <li><a href="#">Trending</a></li> -->
     </ul>
   </div><!--/.well -->
 </div><!--/span-->
+
+
+<% content_for(:footer) do %>
+  <%= javascript_include_tag "typeahead.min" %>
+  <script type="text/javascript">
+    $(function(){
+      $('.find-type').typeahead({
+        name: 'posts',
+        remote: {
+          url: '/search.json?q=%QUERY',
+          filter: lightwell
+        }
+      });
+
+      function lightwell(parsedResponse) {
+        var i, l, obj, matches = [];
+
+        if (parsedResponse.term==="") {
+            return;
+        }
+
+        for  (i = 0, l = parsedResponse.length; i<l; i++) {
+            obj = parsedResponse[i];
+            matches.push(obj.message);
+            matches.push(obj.user.username);
+        }
+        return(matches);
+      }
+    });
+  </script>
+<% end %>

@@ -108,6 +108,10 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.search(params)
+    respond_to do |format|
+      format.html { render 'search' }
+      format.json { render json: @posts }
+    end
   end
 
   private
