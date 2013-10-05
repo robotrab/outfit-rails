@@ -39,9 +39,16 @@
   </a>
   @<%= post.user.username %>
   <%= time_ago_in_words(post.created_at) %>
-  <p>
+  <div style="position:relative;">
     <%= image_tag post.outfit.url(:profile), class: "img-responsive" %>
-  </p>
+    <% post.outfit_tags.each do |tag| %>
+      <div class="tagInput" style="top:<%= tag.y_loc %>px;
+        left:<%= tag.x_loc %>px;">
+        <span class="input-group-addon glyphicon glyphicon-tag"></span>
+        <%= tag.content %>
+      </div>
+    <% end %>
+  </div>
   <p><%= raw auto_link(post.message) %></p>
   <p>
     <% if current_user.favorites.include?(post) %>
