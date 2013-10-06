@@ -1,3 +1,7 @@
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag "typeahead.js-bootstrap" %>
+<% end %>
+
 <div class="col-md-2">
   <div class="well sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
@@ -9,7 +13,7 @@
       <li class=<%= page=="find" ? "active" : "" %>>
         <form action="<%= search_path %>" method="get">
           <span class="glyphicon glyphicon-search"></span>
-          <%= search_field_tag :q, params[:q], class: 'find-type' %>
+          <%= search_field_tag :q, params[:q], class: 'typeahead form-control find-type' %>
           <%= submit_tag "Search", name: nil %>
         </form>
       </li>
