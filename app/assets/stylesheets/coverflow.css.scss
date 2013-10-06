@@ -1,0 +1,72 @@
+.coverContainer {
+  //width: 210px;
+  //height: 195px;
+  position: relative;
+  margin: 50px auto;
+  /*background-color:#000;
+  border: 1px solid #CCC;*/
+  -webkit-perspective: 1100;
+}
+
+#coverflow {
+  //width: 100%;
+  //height: 100%;
+  //position: absolute;
+  /*background-color:#000; */
+  -webkit-transform: translateZ( -200px );
+  -webkit-transform-style: preserve-3d;
+  /*-webkit-backface-visibility: hidden;      */
+}
+
+#coverflow figure {
+  //display: block;
+  //position: absolute;
+  //width: 200px;
+  //height: 170px;
+  //border: 2px solid black;
+  cursor:pointer;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  //-webkit-box-reflect:below 0px -webkit-gradient(linear, left top, left bottom, from(transparent),color-stop(0.7, transparent), to(white));
+  // -webkit-box-shadow:8px -7px 8px rgba(0, 0, 0, 0.9);
+}
+
+// #coverflow figure img {
+//   width:100%;
+//   height:100%;
+// }
+
+/*initial configuration*/
+#coverflow figure:nth-child(1) {
+  -webkit-transform:translateX(100px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(2) {
+  -webkit-transform:translateX(150px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(3) {
+  -webkit-transform:translateX(200px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(4) {
+  -webkit-transform:translateX(250px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(5) {
+  -webkit-transform:translateX(300px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(6) {
+  -webkit-transform:translateX(350px) rotateY(-60deg);
+}
+#coverflow figure:nth-child(7) {
+  -webkit-transform:translateX(400px) rotateY(-60deg);
+}
+
+.pushBtn {
+  width:100px;
+  height:30px;
+  cursor:pointer;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#90CF23), to(#6A9C1D), color-stop(.4,#8BC20A));
+  -webkit-border-radius:5px;
+  border:none;
+  font-family:helvetica;
+  color:#fff;
+  font-size:13px;
+  font-weight:bold;
+}
