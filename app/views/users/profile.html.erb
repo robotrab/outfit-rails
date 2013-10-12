@@ -1,34 +1,30 @@
 <div class="row">
   <%= render partial: "profile_menu", locals: {page: ""}%>
 
-  <section class="coverContainer">
-    <div id="coverflow">
-    <figure id="fig1" cp="-100" a="60" onclick="moveTo(this)"><div class="col-md-3 well">
-      <%= image_tag "cats1.jpg", alt: "Cat1", class: "img-responsive" %>
-      <ul class="list-unstyled list-inline share-row">
-        <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-      </ul>
-    </div></figure>
-    <figure id="fig2" cp="0" a="60" onclick="moveTo(this)"><div class="col-md-4 well">
-      <%= image_tag "cats2.jpg", alt: "Cat2", class: "img-responsive img-rounded" %>
-      <ul class="list-unstyled list-inline share-row">
-        <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-      </ul>
-   </div></figure>
-    <figure id="fig3" cp="100" a="-60" onclick="moveTo(this)"><div class="col-md-3 well">
-      <%= image_tag "cats3.jpg", alt: "Cat3", class: "img-responsive" %>
-      <ul class="list-unstyled list-inline share-row">
-        <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-        <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-      </ul>
-    </div></figure>
-    </div>
-  </section>
+  <div class="col-md-3 well">
+    <%= image_tag "cats1.jpg", alt: "Cat1", class: "img-responsive" %>
+    <ul class="list-unstyled list-inline share-row">
+      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+    </ul>
+  </div>
+  <div class="col-md-4 well">
+    <%= image_tag "cats2.jpg", alt: "Cat2", class: "img-responsive img-rounded" %>
+    <ul class="list-unstyled list-inline share-row">
+      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+    </ul>
+ </div>
+  <div class="col-md-3 well">
+    <%= image_tag "cats3.jpg", alt: "Cat3", class: "img-responsive" %>
+    <ul class="list-unstyled list-inline share-row">
+      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+    </ul>
+  </div>
 </div>
 
 <hr>
@@ -62,130 +58,3 @@
     <% end %>
   </p>
 <% end %>
-
-
-
-<script type="text/javascript">
-      var min = 1;
-      var max = 3;
-      var current = 2;
-      var currPos = 0;
-      var newPos = 0;
-      var currAngle = 0;
-      var newAngle = 0;
-      var gap = 50;
-      var clickedIndex = 0;
-      var diff = 0;
-      window.onload = function() {
-          initialThrust();
-      }
-
-      function initialThrust() {
-          setTimeout(function() {
-              document.getElementById("fig1").style.webkitTransform = "translateX(-200px) rotateY(60deg)";
-              document.getElementById("fig2").style.webkitTransform = "translateX(-150px) rotateY(60deg)";
-              document.getElementById("fig3").style.webkitTransform = "translateX(-100px) rotateY(60deg)";
-              document.getElementById("fig4").style.webkitTransform = "translateX(0px) rotateY(0deg) translateZ(200px)";
-              document.getElementById("fig5").style.webkitTransform = "translateX(100px) rotateY(-60deg)";
-              document.getElementById("fig6").style.webkitTransform = "translateX(150px) rotateY(-60deg)";
-              document.getElementById("fig7").style.webkitTransform = "translateX(200px) rotateY(-60deg)";
-          }, 500);
-      }
-
-      function moveTo(targetObj) {
-          //console.log(targetObj.id);
-              clickedIndex = parseInt(targetObj.id.slice(3, 4));
-              if (clickedIndex > current) {
-                  //move right to the clicked index
-                  console.log("Move right: " + clickedIndex + "/" + current + "/" + (clickedIndex - current));
-                  diff = clickedIndex - current;
-                  for (var i = 1; i <= diff; i++) {
-                      right();
-                  }
-              }
-              else if (clickedIndex < current) {
-                  //move left to the clicked index
-                  console.log("Move left: " + clickedIndex + "/" + current + "/" + (current - clickedIndex));
-                  diff = (current - clickedIndex);
-                  for (var i = 1; i <= diff; i++) {
-                      left();
-                  }
-              }
-              else {
-                  //same element is clicked....do nothing
-              }
-      }
-      function left() {
-          //alert('test');
-          if (current > min) {
-              current--;
-              //console.log("Left: " + current);
-
-              for (var i = 1; i <= max; i++) {
-                  currPos = document.getElementById("fig" + i).getAttribute("cp");
-                  currAngle = document.getElementById("fig" + i).getAttribute("a");
-                  if (currPos == "-100" || currPos == "0") {
-                      newPos = parseInt(currPos) + (gap * 2) * (1);
-                      if (currPos == "0") {
-                          newAngle = -60;
-                      }
-                      else if (currPos = "-100") {
-                          newAngle = 0;
-                      }
-                      else {
-                      }
-                  }
-                  else {
-                      newPos = parseInt(currPos) + (gap) * (1);
-                      newAngle = parseInt(currAngle);
-                  }
-                  //console.log("Curr: " + currPos + " / New: " + newPos);
-                  //console.log("Curr angle: " + currAngle + " / New Angle: " + newAngle);
-                  if (i == current) {
-                      document.getElementById("fig" + i).style.webkitTransform = "translateX(" + newPos + "px) rotateY(" + newAngle + "deg) translateZ(200px)";
-                  }
-                  else {
-                      document.getElementById("fig" + i).style.webkitTransform = "translateX(" + newPos + "px) rotateY(" + newAngle + "deg)";
-                  }
-                  document.getElementById("fig" + i).setAttribute("cp", newPos);
-                  document.getElementById("fig" + i).setAttribute("a", newAngle);
-              }
-          }
-      }
-      function right() {
-          if (current < max) {
-              current++;
-              //console.log("Right: " + current);
-
-              for (var i = 1; i <= max; i++) {
-                  currPos = document.getElementById("fig" + i).getAttribute("cp");
-                  currAngle = document.getElementById("fig" + i).getAttribute("a");
-                  if (currPos == "100" || currPos == "0") {
-                      newPos = parseInt(currPos) + (gap * 2) * (-1);
-                      if (currPos == "0") {
-                          newAngle = 60;
-                      }
-                      else if (currPos = "100") {
-                          newAngle = 0;
-                      }
-                      else {
-                      }
-                  }
-                  else {
-                      newPos = parseInt(currPos) + (gap) * (-1);
-                      newAngle = parseInt(currAngle);
-                  }
-                  //console.log("Curr: " + currPos + " / New: " + newPos);
-                  //console.log("Curr angle: " + currAngle + " / New Angle: " + newAngle);
-                  if (i == current) {
-                      document.getElementById("fig" + i).style.webkitTransform = "translateX(" + newPos + "px) rotateY(" + newAngle + "deg) translateZ(200px)";
-                  }
-                  else {
-                      document.getElementById("fig" + i).style.webkitTransform = "translateX(" + newPos + "px) rotateY(" + newAngle + "deg)";
-                  }
-                  document.getElementById("fig" + i).setAttribute("cp", newPos);
-                  document.getElementById("fig" + i).setAttribute("a", newAngle);
-              }
-          }
-      }
-  </script>
