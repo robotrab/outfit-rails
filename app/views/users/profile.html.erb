@@ -1,31 +1,39 @@
 <div class="row">
   <%= render partial: "profile_menu", locals: {page: ""}%>
 
-  <div class="col-md-3 well">
-    <%= image_tag "cats1.jpg", alt: "Cat1", class: "img-responsive" %>
-    <ul class="list-unstyled list-inline share-row">
-      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-    </ul>
-  </div>
-  <div class="col-md-4 well">
-    <%= image_tag "cats2.jpg", alt: "Cat2", class: "img-responsive img-rounded" %>
-    <ul class="list-unstyled list-inline share-row">
-      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-    </ul>
- </div>
-  <div class="col-md-3 well">
-    <%= image_tag "cats3.jpg", alt: "Cat3", class: "img-responsive" %>
-    <ul class="list-unstyled list-inline share-row">
-      <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
-      <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
-    </ul>
-  </div>
-</div>
+  <div class="coverflow col-md-10">
+    <div class="flowItem">
+      <div class="well">
+        <%= image_tag "cats1.jpg", alt: "Cat1", class: "img-responsive itemImage" %>
+        <ul class="list-unstyled list-inline share-row">
+          <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flowItem">
+      <div class="well">
+        <%= image_tag "cats2.jpg", alt: "Cat2", class: "img-responsive img-rounded itemImage" %>
+        <ul class="list-unstyled list-inline share-row">
+          <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flowItem">
+      <div class="well">
+        <%= image_tag "cats3.jpg", alt: "Cat3", class: "img-responsive itemImage" %>
+        <ul class="list-unstyled list-inline share-row">
+          <li><a class="btn btn-default" href="#TODO">Comment &raquo;</a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+          <li class="pull-right"><a class="btn btn-default" href="#TODO"><span class="glyphicon glyphicon-heart"></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- end coverflow -->
+</div><!-- end row -->
 
 <hr>
 
@@ -58,3 +66,41 @@
     <% end %>
   </p>
 <% end %>
+
+<script>
+  $(function(){
+    transformCovers();
+    $('.coverflow').on('click','.flowItem:not(.selected)',function(){
+      transformCovers($(this));
+    });
+  });
+
+  function transformCovers(centerItem,callback) {
+    if(typeof(centerItem)=="undefined"){
+      var items = $('.coverflow .flowItem');
+      centerItem = items.eq(parseInt(items.length/2));
+    }
+
+    if(!centerItem.hasClass('selected')){
+      var leftItems = centerItem.prevAll('.flowItem');
+      var rightItems = centerItem.nextAll('.flowItem');
+
+      var transform_vals = "translateX(0) translateZ(0)";
+      centerItem.css({"transform": transform_vals});
+
+      leftItems.each(function(i){
+        var itemdelta = i+1;
+        var transform_vals = "translateX("+((itemdelta)*-100)+"%) translateZ(-200px)";
+        $(this).css({"transform": transform_vals});
+      });
+
+      rightItems.each(function(i){
+        var itemdelta = i+1;
+        var transform_vals = "translateX("+((itemdelta)*100)+"%)  translateZ(-200px)";
+        $(this).css({"transform": transform_vals});
+      });
+
+   centerItem.addClass('selected').siblings('.selected').removeClass('selected');
+    }
+  }
+</script>

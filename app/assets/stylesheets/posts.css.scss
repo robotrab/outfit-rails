@@ -35,3 +35,28 @@ body {
 #expand:hover, #expand:focus {
     width: 200px;
 }
+
+
+//COVERFLOW IMPLEMENTATION
+.coverflow{
+ //width: 80%;
+ //height: 150px;
+ perspective: 500px;
+ -webkit-perspective: 500;
+ transform-style: preserve-3d;
+ -webkit-transform-style: preserve-3d;
+}
+
+.coverflow .flowItem{
+ position:absolute;
+ height: 100%;
+ width: 40%;
+ left:50%;
+ top:50%;
+ margin-left:-100px;
+ //margin-top: -75px;
+ cursor: pointer;
+ z-index: 10;
+
+ transition: all 1s;
+}
